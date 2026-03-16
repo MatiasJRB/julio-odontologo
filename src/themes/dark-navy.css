@@ -1,0 +1,49 @@
+/* ============================================================
+   TEMA: Dark Navy — Elegante, profesional, oscuro
+   Paleta: azul marino profundo + dorado cálido + marfil
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&display=swap');
+
+/* ── Tema 1 activo — overrides scoped para evitar flash de transición ── */
+html[data-theme="dark-navy"] .navbar,
+html[data-theme="dark-navy"] .navbar.scrolled {
+  /* el fondo sigue siendo el del componente (transparent / color-mix navy) */
+}
+html[data-theme="dark-navy"] .navbar__logo-name    { color: #ffffff; }
+html[data-theme="dark-navy"] .navbar__logo-sub     { color: var(--color-gold-light); }
+html[data-theme="dark-navy"] .navbar__links a      { color: rgba(255,255,255,0.85); }
+html[data-theme="dark-navy"] .navbar__links a:hover{ color: var(--color-gold-light); }
+html[data-theme="dark-navy"] .navbar__burger span  { background: #ffffff; }
+
+/* CTA — texto oscuro sobre fondo dorado para contraste suficiente (>7:1) */
+html[data-theme="dark-navy"] .navbar__cta {
+  background: var(--color-gold) !important;
+  color: var(--color-navy) !important;
+}
+html[data-theme="dark-navy"] .navbar__cta:hover {
+  background: var(--color-gold-light) !important;
+  color: var(--color-navy) !important;
+}
+
+:root {
+  /* ── Paleta ── */
+  --color-navy:       #0d1424;
+  --color-navy-light: #172136;
+  --color-gold:       #b8966e;
+  --color-gold-light: #d4b896;
+  --color-ivory:      #f8f5f0;
+  --color-white:      #ffffff;
+  --color-text:       #2c2c2c;
+  --color-text-light: #6b6b6b;
+  --color-border:     #e0d9d0;
+  --color-bg:         #f8f5f0;
+  --glass-bg:         rgba(255, 255, 255, 0.04);
+  --glass-border:     rgba(255, 255, 255, 0.1);
+
+  /* ── Tipografía decorativa (específica del tema) ── */
+  --font-serif:  'Cormorant Garamond', Georgia, serif;
+
+  /* ── Forma (específica del tema) ── */
+  --radius:      4px;
+}

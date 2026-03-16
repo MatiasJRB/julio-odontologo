@@ -1,0 +1,95 @@
+/* ============================================================
+   TEMA 3: Warm Cream — Clásico, cálido, acogedor
+   Paleta: bordo profundo + terracota + crema marfil
+   Activo cuando: html[data-theme="warm"]
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+html[data-theme="warm"] {
+  /* ── Paleta ── */
+  --color-navy:       #5c2333;
+  --color-navy-light: #722c40;
+  --color-gold:       #b87352;
+  --color-gold-light: #ce9474;
+  --color-ivory:      #fdf9f4;
+  --color-white:      #ffffff;
+  --color-text:       #2d1a1a;
+  --color-text-light: #7a5c5a;
+  --color-border:     #ead5cc;
+  --color-bg:         #fdf9f4;
+  --glass-bg:         rgba(253, 249, 244, 0.5);
+  --glass-border:     rgba(92, 35, 51, 0.08);
+
+  /* ── Tipografía decorativa (específica del tema) ── */
+  --font-serif:  'Playfair Display', Georgia, serif;
+
+  /* ── Forma (específica del tema) ── */
+  --radius:      2px;        /* más cuadrado, clásico */
+}
+
+/* ── Overrides navbar Warm — sólo cuando scrolled (fondo crema) ── */
+html[data-theme="warm"] .navbar.scrolled {
+  background: rgba(253,249,244,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(92,35,51,0.08);
+}
+/* Texto oscuro sólo cuando el fondo del navbar ya es claro */
+html[data-theme="warm"] .navbar.scrolled .navbar__logo-name    { color: var(--color-navy); }
+html[data-theme="warm"] .navbar.scrolled .navbar__logo-sub     { color: var(--color-gold); }
+html[data-theme="warm"] .navbar.scrolled .navbar__links a      { color: var(--color-navy); }
+html[data-theme="warm"] .navbar.scrolled .navbar__links a:hover{ color: var(--color-gold); }
+html[data-theme="warm"] .navbar.scrolled .navbar__burger span  { background: var(--color-navy); }
+html[data-theme="warm"] .navbar.scrolled .theme-picker {
+  border-color: rgba(92,35,51,0.2);
+  background: rgba(92,35,51,0.06);
+}
+html[data-theme="warm"] .navbar.scrolled .theme-pill       { color: rgba(92,35,51,0.45); }
+html[data-theme="warm"] .navbar.scrolled .theme-pill:hover { color: var(--color-navy); }
+html[data-theme="warm"] .navbar.scrolled .theme-pill.active{
+  background: var(--color-gold);
+  color: var(--color-navy);
+}
+
+/* Secciones alternas */
+html[data-theme="warm"] .empresa,
+html[data-theme="warm"] .contacto  { background: var(--color-ivory); }
+html[data-theme="warm"] .quienes   { background: #ffffff; }
+/* Hero: bordo oscuro + grilla ortogonal tenue + destello terracota */
+html[data-theme="warm"] .hero {
+  background-color: #2a0c17;
+  background-image:
+    radial-gradient(ellipse 60% 70% at 82% 18%, rgba(184,115,82,0.30) 0%, transparent 68%),
+    repeating-linear-gradient(0deg,   rgba(255,255,255,0.022) 0px, rgba(255,255,255,0.022) 1px, transparent 1px, transparent 48px),
+    repeating-linear-gradient(90deg,  rgba(255,255,255,0.022) 0px, rgba(255,255,255,0.022) 1px, transparent 1px, transparent 48px);
+}
+/* Hacemos: bordo profundo + destello terracota lateral */
+html[data-theme="warm"] .hacemos {
+  background-color: #2a0c17;
+  background-image:
+    radial-gradient(ellipse 55% 65% at 90% 50%, rgba(184,115,82,0.28) 0%, transparent 70%),
+    repeating-linear-gradient(0deg,   rgba(255,255,255,0.022) 0px, rgba(255,255,255,0.022) 1px, transparent 1px, transparent 48px),
+    repeating-linear-gradient(90deg,  rgba(255,255,255,0.022) 0px, rgba(255,255,255,0.022) 1px, transparent 1px, transparent 48px);
+}
+html[data-theme="warm"] .footer    { background: var(--color-navy); }
+
+/* Menú mobile */
+@media (max-width: 768px) {
+  html[data-theme="warm"] .navbar__links { background: #fdf9f4; }
+  html[data-theme="warm"] .navbar__links a { color: var(--color-navy); }
+}
+
+/* ── Hacemos: cards con glass oscuro para mantener contraste con texto blanco ── */
+html[data-theme="warm"] .hacemos .hacemos__service-card {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+html[data-theme="warm"] .hacemos .hacemos__service-card:hover {
+  background: rgba(255, 255, 255, 0.13);
+  border-color: color-mix(in srgb, var(--color-gold) 50%, transparent);
+}
+html[data-theme="warm"] .hacemos .hacemos__insumos {
+  background: color-mix(in srgb, var(--color-gold) 12%, transparent);
+  border-color: color-mix(in srgb, var(--color-gold) 30%, transparent);
+}

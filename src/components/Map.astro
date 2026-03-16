@@ -1,0 +1,116 @@
+---
+interface Props {
+  lat?: number;
+  lng?: number;
+  zoom?: number;
+  label?: string;
+  address?: string;
+}
+
+const {
+  lat     = -38.7196,
+  lng     = -62.2661,
+  zoom    = 16,
+  label   = 'Julio A. Ferraro Contactología',
+  address = "O'Higgins 27, Local 15 — Bahía Blanca",
+} = Astro.props;
+---
+
+<!-- Leaflet CSS -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  crossorigin=""
+/>
+
+<div class="mapa">
+  <div class="mapa__header">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+      <circle cx="12" cy="10" r="3"/>
+    </svg>
+    {address}
+  </div>
+  <div id="ferraro-map"></div>
+</div>
+
+<!-- Leaflet JS -->
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLHg="
+  crossorigin=""
+></script>
+
+<script define:vars={{ lat, lng, zoom, label, address }}>
+  function initMap() {
+    if (typeof L === 'undefined') {
+      // Leaflet CDN aun no cargo, reintentamos en 100ms
+      setTimeout(initMap, 100);
+      return;
+    }
+
+    if (document.getElementById('ferraro-map')?._leaflet_id) return; // ya inicializado
+
+    const map = L.map('ferraro-map', {
+      center: [lat, lng],
+      zoom,
+      scrollWheelZoom: false,
+      zoomControl: true,
+    });
+
+    // OpenStreetMap tiles — gratis, sin API key
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).addTo(map);
+
+    // Marcador custom con los colores del tema
+    const svgIcon = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="48" viewBox="0 0 36 48">
+        <path d="M18 0C8.06 0 0 8.06 0 18c0 13.5 18 30 18 30S36 31.5 36 18C36 8.06 27.94 0 18 0z"
+              fill="#1a2540" stroke="#b8966e" stroke-width="2"/>
+        <circle cx="18" cy="18" r="7" fill="#b8966e"/>
+        <circle cx="18" cy="18" r="3" fill="#ffffff"/>
+      </svg>`;
+
+    const icon = L.divIcon({
+      html: svgIcon,
+      iconSize: [36, 48],
+      iconAnchor: [18, 48],
+      popupAnchor: [0, -48],
+      className: '',
+    });
+
+    const marker = L.marker([lat, lng], { icon }).addTo(map);
+
+    // Popup
+    marker.bindPopup(`
+      <div style="padding:14px 16px;min-width:200px;font-family:system-ui,sans-serif;">
+        <strong style="display:block;font-size:0.9rem;color:#1a2540;margin-bottom:4px;">
+          ${label}
+        </strong>
+        <span style="font-size:0.78rem;color:#6b6b6b;line-height:1.5;">
+          ${address}
+        </span>
+        <br/>
+        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}"
+           target="_blank" rel="noopener"
+           style="display:inline-block;margin-top:10px;font-size:0.72rem;
+                  color:#b8966e;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">
+          Abrir en Google Maps →
+        </a>
+      </div>
+    `, { maxWidth: 260 });
+
+    marker.openPopup();
+  }
+
+  // Lanzar: espera a que el DOM esté listo y que Leaflet haya cargado
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMap);
+  } else {
+    initMap();
+  }
+</script>

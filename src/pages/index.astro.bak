@@ -1,0 +1,426 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/global.css';
+---
+
+<Layout>
+  <!-- ====================================================
+       NAVBAR
+       ==================================================== -->
+  <nav class="navbar" id="navbar">
+    <div class="container navbar__inner">
+      <a href="#inicio" class="navbar__logo">
+        <span class="navbar__logo-name">Julio A. Ferraro</span>
+        <span class="navbar__logo-sub">Contactología · Bahía Blanca</span>
+      </a>
+
+      <ul class="navbar__links" id="navLinks">
+        <li><a href="#empresa">Nuestra Empresa</a></li>
+        <li><a href="#quienes">Quiénes Somos</a></li>
+        <li><a href="#hacemos">Qué Hacemos</a></li>
+        <li><a href="#contacto" class="navbar__cta">Contacto</a></li>
+      </ul>
+
+      <button class="navbar__burger" id="burger" aria-label="Menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ====================================================
+       HERO
+       ==================================================== -->
+  <section class="hero" id="inicio">
+    <div class="container">
+      <div class="hero__content">
+        <p class="hero__eyebrow">Bahía Blanca — Desde 1981</p>
+        <h1 class="hero__title">
+          Julio Alejandro<strong>Ferraro</strong>
+        </h1>
+        <p class="hero__subtitle">Óptico Contactólogo · Protesista Ocular</p>
+        <p class="hero__mp">M.P. 163</p>
+        <p class="hero__description">
+          Dedicación exclusiva a la adaptación profesional de lentes de contacto
+          y prótesis oculares. Más de cuarenta años acompañando a nuestros pacientes
+          con el conocimiento y equipamiento necesarios.
+        </p>
+        <div class="hero__actions">
+          <a href="#hacemos" class="btn btn-primary">Ver Servicios</a>
+          <a href="#contacto" class="btn btn-outline">Solicitar Turno</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+      scroll
+    </div>
+  </section>
+
+  <!-- ====================================================
+       NUESTRA EMPRESA
+       ==================================================== -->
+  <section class="empresa" id="empresa">
+    <div class="container">
+      <div class="empresa__grid">
+        <div>
+          <span class="section-label" data-animate>Nuestra Empresa</span>
+          <h2 class="section-title" data-animate data-animate-delay="1">
+            Profesionalismo al servicio de su visión
+          </h2>
+          <div class="section-divider" data-animate data-animate-delay="2"></div>
+          <p class="section-body" data-animate data-animate-delay="2">
+            Somos <strong>JULIO A. FERRARO CONTACTOLOGÍA</strong>, contamos con personal
+            capacitado para asesorarlo profesionalmente en la elección de las lentes de
+            contacto y prótesis oculares más apropiadas para su caso particular.
+          </p>
+          <br />
+          <p class="section-body" data-animate data-animate-delay="3">
+            Estamos en <strong>Bahía Blanca</strong>. Lo invitamos a conocer nuestras
+            instalaciones y comprobar la calidad de atención que nos caracteriza.
+            Estamos a su disposición.
+          </p>
+        </div>
+
+        <div class="empresa__visual" data-animate data-animate-delay="2">
+          <div class="empresa__card">
+            <div class="empresa__card-icon">👁️</div>
+            <h3 class="empresa__card-title">Atención Personalizada</h3>
+            <p class="empresa__card-text">
+              Cada paciente es único. Nuestro equipo brinda asesoramiento
+              individualizado para encontrar la solución más adecuada a
+              cada necesidad visual.
+            </p>
+            <div class="empresa__card-location">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              O'Higgins 27, Local 15 · Bahía Blanca
+            </div>
+
+            <div class="empresa__stats">
+              <div class="empresa__stat">
+                <div class="empresa__stat-num">+40</div>
+                <div class="empresa__stat-label">Años de experiencia</div>
+              </div>
+              <div class="empresa__stat">
+                <div class="empresa__stat-num">163</div>
+                <div class="empresa__stat-label">Matrícula profesional</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       QUIÉNES SOMOS
+       ==================================================== -->
+  <section class="quienes" id="quienes">
+    <div class="container">
+      <div class="quienes__inner">
+        <div>
+          <span class="section-label" data-animate>Quiénes Somos</span>
+          <h2 class="section-title" data-animate data-animate-delay="1">
+            Dedicación exclusiva a nuestra especialidad
+          </h2>
+          <div class="section-divider" data-animate data-animate-delay="2"></div>
+          <p class="section-body" data-animate data-animate-delay="2">
+            Nos dedicamos <strong>EXCLUSIVAMENTE</strong> a la adaptación de lentes de
+            contacto y prótesis oculares. En la zona nos conocen por esa dedicación
+            exclusiva y por el trato amable y respetuoso que hace que los pacientes
+            nos elijan.
+          </p>
+
+          <div class="quienes__values" data-animate data-animate-delay="3">
+            <div class="quienes__value">
+              <div class="quienes__value-icon">🎯</div>
+              <div>
+                <h4 class="quienes__value-title">Especialización Total</h4>
+                <p class="quienes__value-text">
+                  Dedicación exclusiva a lentes de contacto y prótesis oculares,
+                  sin dispersión ni compromisos a medias.
+                </p>
+              </div>
+            </div>
+            <div class="quienes__value">
+              <div class="quienes__value-icon">🤝</div>
+              <div>
+                <h4 class="quienes__value-title">Trato Cercano</h4>
+                <p class="quienes__value-text">
+                  El trato amable y respetuoso que nos caracteriza es la base
+                  de la confianza de nuestros pacientes.
+                </p>
+              </div>
+            </div>
+            <div class="quienes__value">
+              <div class="quienes__value-icon">🔬</div>
+              <div>
+                <h4 class="quienes__value-title">Equipamiento Actualizado</h4>
+                <p class="quienes__value-text">
+                  Crecimiento profesional continuo para brindar el conocimiento
+                  y equipamiento necesarios en cada caso.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quienes__timeline" data-animate data-animate-delay="2">
+          <div class="quienes__tl-item">
+            <div class="quienes__tl-dot"></div>
+            <p class="quienes__tl-year">1981</p>
+            <p class="quienes__tl-text">
+              Inicio ininterrumpido en el rubro óptico, con dedicación exclusiva
+              a la contactología desde el primer día.
+            </p>
+          </div>
+          <div class="quienes__tl-item">
+            <div class="quienes__tl-dot"></div>
+            <p class="quienes__tl-year">Crecimiento continuo</p>
+            <p class="quienes__tl-text">
+              Sin parar de crecer profesionalmente para poder brindar a nuestros
+              pacientes el mejor nivel de atención.
+            </p>
+          </div>
+          <div class="quienes__tl-item">
+            <div class="quienes__tl-dot"></div>
+            <p class="quienes__tl-year">Hoy</p>
+            <p class="quienes__tl-text">
+              Referentes en Bahía Blanca por la dedicación exclusiva a la
+              especialidad y la calidad de atención que ofrecemos.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       QUÉ HACEMOS
+       ==================================================== -->
+  <section class="hacemos" id="hacemos">
+    <div class="container">
+      <div class="hacemos__header" data-animate>
+        <span class="section-label">Qué Hacemos</span>
+        <h2 class="section-title">Nuestros Servicios</h2>
+        <div class="section-divider" style="margin-inline: auto;"></div>
+        <p class="section-body">
+          Adaptación profesional en todas sus variantes, con el equipamiento
+          y la experiencia necesarios para cada caso particular.
+        </p>
+      </div>
+
+      <div class="hacemos__grid">
+        <div class="hacemos__card" data-animate data-animate-delay="1">
+          <div class="hacemos__card-icon">🔵</div>
+          <h3 class="hacemos__card-title">Adaptación de Lentes de Contacto</h3>
+          <ul class="hacemos__list">
+            <li>Flexibles</li>
+            <li>Gas permeables</li>
+            <li>Blandos estándar y alto grado</li>
+            <li>Blandos descartables</li>
+            <li>Protésicos</li>
+            <li>Cosméticos</li>
+            <li>Multifocales</li>
+            <li>Especiales para queratocono y córneas irregulares</li>
+          </ul>
+        </div>
+
+        <div class="hacemos__card" data-animate data-animate-delay="2">
+          <div class="hacemos__card-icon">⚪</div>
+          <h3 class="hacemos__card-title">Adaptación de Prótesis Oculares</h3>
+          <ul class="hacemos__list">
+            <li>Prótesis estándar</li>
+            <li>Prótesis a medida</li>
+            <li>Conformadores orbitales</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="hacemos__insumos" data-animate>
+        <span>🧴</span>
+        <p>
+          Contamos con <strong>insumos de limpieza y mantenimiento</strong>, así como
+          asesoramiento permanente para el cuidado de sus lentes o prótesis.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       CONTACTO
+       ==================================================== -->
+  <section class="contacto" id="contacto">
+    <div class="container">
+      <div class="contacto__grid">
+        <div>
+          <span class="section-label" data-animate>Contacto</span>
+          <h2 class="section-title" data-animate data-animate-delay="1">
+            Estamos a su disposición
+          </h2>
+          <div class="section-divider" data-animate data-animate-delay="2"></div>
+          <p class="section-body" data-animate data-animate-delay="2">
+            Consúltenos sin compromiso. Le responderemos a la brevedad o puede
+            comunicarse directamente a nuestro local.
+          </p>
+
+          <div class="contacto__info" data-animate data-animate-delay="3">
+            <div class="contacto__item">
+              <div class="contacto__item-icon">📍</div>
+              <div>
+                <p class="contacto__item-title">Dirección</p>
+                <p class="contacto__item-text">O'Higgins 27, Local 15<br/>Bahía Blanca, Buenos Aires</p>
+              </div>
+            </div>
+            <div class="contacto__item">
+              <div class="contacto__item-icon">📞</div>
+              <div>
+                <p class="contacto__item-title">Teléfono</p>
+                <p class="contacto__item-text">
+                  <a href="tel:+5429145404550">(0291) 454-0455</a>
+                </p>
+              </div>
+            </div>
+            <div class="contacto__item">
+              <div class="contacto__item-icon">🕐</div>
+              <div>
+                <p class="contacto__item-title">Matrícula</p>
+                <p class="contacto__item-text">M.P. 163</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div data-animate data-animate-delay="2">
+          <form
+            class="form"
+            id="contactForm"
+            name="contacto"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+          >
+            <input type="hidden" name="form-name" value="contacto" />
+            <p style="display:none">
+              <label>No completar: <input name="bot-field" /></label>
+            </p>
+
+            <div class="form__row">
+              <div class="form__group">
+                <label class="form__label" for="nombre">Nombre</label>
+                <input class="form__input" type="text" id="nombre" name="nombre" placeholder="Su nombre" required />
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="telefono">Teléfono</label>
+                <input class="form__input" type="tel" id="telefono" name="telefono" placeholder="Su teléfono" />
+              </div>
+            </div>
+
+            <div class="form__group">
+              <label class="form__label" for="email">Email</label>
+              <input class="form__input" type="email" id="email" name="email" placeholder="su@email.com" required />
+            </div>
+
+            <div class="form__group">
+              <label class="form__label" for="consulta">Consulta</label>
+              <textarea
+                class="form__textarea"
+                id="consulta"
+                name="consulta"
+                placeholder="Describa brevemente su consulta o motivo de contacto..."
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary form__submit">
+              Enviar Mensaje
+            </button>
+
+            <div class="form__success" id="formSuccess">
+              ✓ Mensaje enviado correctamente. Le responderemos a la brevedad.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       FOOTER
+       ==================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div>
+          <p class="footer__brand-name">Julio A. Ferraro Contactología</p>
+          <p class="footer__brand-sub">Óptico Contactólogo · M.P. 163</p>
+        </div>
+        <ul class="footer__links">
+          <li><a href="#empresa">Empresa</a></li>
+          <li><a href="#quienes">Quiénes Somos</a></li>
+          <li><a href="#hacemos">Servicios</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <p class="footer__copy">
+        © {new Date().getFullYear()} Julio A. Ferraro Contactología · O'Higgins 27, Local 15, Bahía Blanca · (0291) 454-0455
+      </p>
+    </div>
+  </footer>
+</Layout>
+
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar?.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Burger menu
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger?.addEventListener('click', () => {
+    navLinks?.classList.toggle('open');
+  });
+  navLinks?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+  // Form feedback (for non-Netlify fallback)
+  const form = document.getElementById('contactForm') as HTMLFormElement | null;
+  const success = document.getElementById('formSuccess');
+  form?.addEventListener('submit', (e) => {
+    // Netlify handles submission natively; just show success on page reload if ?submitted=true
+    const url = new URL(window.location.href);
+    if (url.searchParams.get('submitted') === 'true' && success) {
+      success.style.display = 'block';
+    }
+  });
+
+  // Show success message if redirected back
+  if (new URLSearchParams(window.location.search).get('submitted') === 'true') {
+    const s = document.getElementById('formSuccess');
+    if (s) s.style.display = 'block';
+  }
+</script>

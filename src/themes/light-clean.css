@@ -1,0 +1,113 @@
+/* ============================================================
+   TEMA: Light Clean — Claro, moderno, salud visual
+   Paleta: verde azulado profundo + verde agua + blanco limpio
+   Activo cuando: html[data-theme="light"]
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap');
+
+html[data-theme="light"] {
+  /* ── Paleta ── */
+  --color-navy:       #1b3a4b;
+  --color-navy-light: #264d62;
+  --color-gold:       #2a9d8f;
+  --color-gold-light: #52b5aa;
+  --color-ivory:      #f0f8f8;
+  --color-white:      #ffffff;
+  --color-text:       #1a2d38;
+  --color-text-light: #5a6e7a;
+  --color-border:     #c8dde3;
+  --color-bg:         #ffffff;
+  --glass-bg:         rgba(255, 255, 255, 0.6);
+  --glass-border:     rgba(255, 255, 255, 0.5);
+
+  /* ── Tipografía decorativa (específica del tema) ── */
+  --font-serif:  'Lora', Georgia, serif;
+
+  /* ── Forma (específica del tema) ── */
+  --radius:      8px;
+}
+
+/* ── Overrides navbar Light — sólo cuando scrolled (fondo claro) ── */
+html[data-theme="light"] .navbar.scrolled {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+/* Texto oscuro sólo cuando el fondo del navbar ya es claro */
+html[data-theme="light"] .navbar.scrolled .navbar__logo-name { color: var(--color-navy); }
+html[data-theme="light"] .navbar.scrolled .navbar__logo-sub  { color: var(--color-gold); }
+html[data-theme="light"] .navbar.scrolled .navbar__links a   { color: var(--color-navy); }
+html[data-theme="light"] .navbar.scrolled .navbar__links a:hover { color: var(--color-gold); }
+html[data-theme="light"] .navbar.scrolled .navbar__burger span { background: var(--color-navy); }
+html[data-theme="light"] .navbar.scrolled .theme-picker {
+  border-color: rgba(27,58,75,0.2);
+  background: rgba(27,58,75,0.06);
+}
+html[data-theme="light"] .navbar.scrolled .theme-pill       { color: rgba(27,58,75,0.45); }
+html[data-theme="light"] .navbar.scrolled .theme-pill:hover { color: var(--color-navy); }
+html[data-theme="light"] .navbar.scrolled .theme-pill.active {
+  background: var(--color-navy);
+  color: #ffffff;
+}
+/* CTA — contraste en ambos estados */
+html[data-theme="light"] .navbar__cta {
+  background: var(--color-navy) !important;
+  color: #ffffff !important;
+}
+html[data-theme="light"] .navbar__cta:hover {
+  background: var(--color-navy-light) !important;
+  color: #ffffff !important;
+}
+/* Secciones alternas con fondo claro */
+html[data-theme="light"] .empresa,
+html[data-theme="light"] .contacto {
+  background: var(--color-ivory);
+}
+html[data-theme="light"] .quienes {
+  background: #ffffff;
+}
+/* Hero: verde azulado oscuro + grilla de puntos + destello aqua */
+html[data-theme="light"] .hero {
+  background-color: #0c2535;
+  background-image:
+    radial-gradient(ellipse 60% 70% at 82% 18%, rgba(42,157,143,0.35) 0%, transparent 68%),
+    radial-gradient(circle, rgba(42,157,143,0.10) 1px, transparent 1px);
+  background-size: auto, 30px 30px;
+}
+/* Hacemos: verde azulado profundo + destello aqua lateral */
+html[data-theme="light"] .hacemos {
+  background-color: #0c2535;
+  background-image:
+    radial-gradient(ellipse 55% 65% at 90% 50%, rgba(42,157,143,0.30) 0%, transparent 70%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 60px),
+    repeating-linear-gradient(45deg,  rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 60px);
+}
+/* Footer */
+html[data-theme="light"] .footer {
+  background: var(--color-navy);
+}
+/* Mobile menu overlay */
+@media (max-width: 768px) {
+  html[data-theme="light"] .navbar__links {
+    background: #ffffff;
+  }
+  html[data-theme="light"] .navbar__links a {
+    color: var(--color-navy);
+  }
+}
+
+/* ── Hacemos: cards con glass oscuro para mantener contraste con texto blanco ── */
+html[data-theme="light"] .hacemos .hacemos__service-card {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+html[data-theme="light"] .hacemos .hacemos__service-card:hover {
+  background: rgba(255, 255, 255, 0.13);
+  border-color: color-mix(in srgb, var(--color-gold) 50%, transparent);
+}
+html[data-theme="light"] .hacemos .hacemos__insumos {
+  background: color-mix(in srgb, var(--color-gold) 12%, transparent);
+  border-color: color-mix(in srgb, var(--color-gold) 30%, transparent);
+}

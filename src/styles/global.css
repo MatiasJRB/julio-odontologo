@@ -1,0 +1,12 @@
+/*
+ * global.css — DEPRECATED
+ *
+ * Este archivo ya no se usa. La hoja de estilos está separada en:
+ *   src/styles/base.css       — reset, utilidades, animaciones
+ *   src/themes/dark-navy.css  — tema oscuro navy + gold (default)
+ *   src/themes/light-clean.css — tema claro teal + blanco
+ *   src/styles/components.css — todos los componentes de página
+ *
+ * Para agregar un nuevo tema: crear src/themes/mi-tema.css
+ * y pasar theme="mi-tema" al componente Layout.
+ */
