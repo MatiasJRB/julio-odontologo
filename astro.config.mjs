@@ -1,8 +1,10 @@
 import { defineConfig } from 'astro/config';
 import vercel from '@astrojs/vercel';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://ferraro-contactologia.com.ar',
+  site: 'https://julioferraro.com.ar',
   adapter: vercel(),
-  output: 'static',
+  output: 'server',
+  integrations: [sitemap()],
 });

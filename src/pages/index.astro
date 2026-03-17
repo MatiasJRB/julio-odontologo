@@ -39,6 +39,7 @@ import '../styles/components.css';
         <button class="theme-pill" data-theme="dark-navy">T1</button>
         <button class="theme-pill" data-theme="light">T2</button>
         <button class="theme-pill" data-theme="warm">T3</button>
+        <a href="/t4" class="theme-pill theme-pill--t4" title="Ver propuesta T4 (layout alternativo)">T4</a>
       </div>
     </div>
   </nav>
@@ -428,14 +429,10 @@ import '../styles/components.css';
           <form
             class="form"
             id="contactForm"
-            name="contacto"
-            method="POST"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
           >
-            <input type="hidden" name="form-name" value="contacto" />
-            <p style="display:none">
-              <label>No completar: <input name="bot-field" /></label>
+            <!-- honeypot: campo oculto para detectar bots -->
+            <p style="display:none" aria-hidden="true">
+              <label>No completar: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
             </p>
 
             <div class="form__row">
@@ -451,7 +448,7 @@ import '../styles/components.css';
 
             <div class="form__group">
               <label class="form__label" for="email">Email</label>
-              <input class="form__input" type="email" id="email" name="email" placeholder="su@email.com" required />
+              <input class="form__input" type="email" id="email" name="email" placeholder="su@email.com" />
             </div>
 
             <div class="form__group">
@@ -481,6 +478,10 @@ import '../styles/components.css';
             <div class="form__success" id="formSuccess">
               <Icon name="check-circle" size={16} />
               Mensaje enviado correctamente. Le responderemos a la brevedad.
+            </div>
+            <div class="form__error" id="formError" style="display:none">
+              <Icon name="alert-circle" size={16} />
+              Error al enviar el mensaje. Intente nuevamente o contáctenos por WhatsApp.
             </div>
           </form>
         </div>
@@ -562,23 +563,90 @@ import '../styles/components.css';
   );
   document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
 
-  if (new URLSearchParams(window.location.search).get('submitted') === 'true') {
-    const s = document.getElementById('formSuccess');
-    if (s) s.style.display = 'flex';
-  }
+  // ── Formulario → /api/contact (Resend) ──────────────────
+  const contactForm = document.getElementById('contactForm') as HTMLFormElement | null;
+  const formSuccess = document.getElementById('formSuccess');
+  const formError   = document.getElementById('formError');
+  const submitBtn   = contactForm?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+  // Limpiar errores de validación mientras el usuario escribe
+  contactForm?.querySelectorAll('input, textarea').forEach(el => {
+    el.addEventListener('input', () => (el as HTMLInputElement).setCustomValidity(''));
+  });
+
+  contactForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const emailEl = document.getElementById('email') as HTMLInputElement;
+    if (!emailEl?.value.trim()) {
+      emailEl.setCustomValidity('Por favor ingrese su correo electrónico.');
+      emailEl.reportValidity();
+      return;
+    }
+    emailEl.setCustomValidity('');
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+    }
+    if (formError)   formError.style.display   = 'none';
+    if (formSuccess) formSuccess.style.display = 'none';
+
+    try {
+      const body = {
+        'bot-field': (contactForm.querySelector<HTMLInputElement>('[name="bot-field"]')?.value ?? ''),
+        nombre:   (document.getElementById('nombre')   as HTMLInputElement)?.value.trim(),
+        telefono: (document.getElementById('telefono') as HTMLInputElement)?.value.trim(),
+        email:    (document.getElementById('email')    as HTMLInputElement)?.value.trim(),
+        consulta: (document.getElementById('consulta') as HTMLTextAreaElement)?.value.trim(),
+      };
+      const res  = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const json = await res.json();
+
+      if (res.ok && json.ok) {
+        if (formSuccess) formSuccess.style.display = 'flex';
+        contactForm.reset();
+      } else {
+        throw new Error(json.error || 'Error desconocido');
+      }
+    } catch (err: unknown) {
+      if (formError) {
+        const msg = err instanceof Error ? err.message : 'Error al enviar. Intente nuevamente.';
+        formError.textContent = msg;
+        formError.style.display = 'flex';
+      }
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar Mensaje por Correo';
+      }
+    }
+  });
 
   // ── WhatsApp desde formulario ─────────────────────────────
   // TODO: reemplazar con el número privado de WhatsApp de Julio cuando se confirme
   const WA_NUMBER = '5492916442425';
 
   document.getElementById('whatsappBtn')?.addEventListener('click', () => {
-    const nombre   = (document.getElementById('nombre')   as HTMLInputElement)?.value.trim();
-    const telefono = (document.getElementById('telefono') as HTMLInputElement)?.value.trim();
-    const consulta = (document.getElementById('consulta') as HTMLTextAreaElement)?.value.trim();
+    const nombre     = (document.getElementById('nombre')   as HTMLInputElement)?.value.trim();
+    const email      = (document.getElementById('email')    as HTMLInputElement)?.value.trim();
+    const consultaEl = document.getElementById('consulta') as HTMLTextAreaElement;
+    const consulta   = consultaEl?.value.trim();
+
+    if (!consulta) {
+      consultaEl?.setCustomValidity('Por favor ingrese su consulta.');
+      consultaEl?.reportValidity();
+      return;
+    }
+    consultaEl?.setCustomValidity('');
 
     let msg = 'Hola, les escribo desde su sitio web.';
     if (nombre)   msg += `\n\nMi nombre es *${nombre}*`;
-    if (telefono) msg += ` y mi teléfono es ${telefono}.`;
+    if (email) msg += ` y mi correo es ${email}.`;
     else if (nombre) msg += '.';
     if (consulta) msg += `\n\n*Consulta:* ${consulta}`;
 
@@ -587,10 +655,10 @@ import '../styles/components.css';
   });
 
   // ── Theme picker (3 temas) ────────────────────────────────
-  const pills = document.querySelectorAll('.theme-pill');
+  const pills = document.querySelectorAll<HTMLElement>('.theme-pill');
   const html  = document.documentElement;
 
-  function setTheme(t) {
+  function setTheme(t: string) {
     html.setAttribute('data-theme', t);
     localStorage.setItem('ferraro-theme', t);
     pills.forEach(p => p.classList.toggle('active', p.dataset.theme === t));
@@ -600,6 +668,6 @@ import '../styles/components.css';
   setTheme(saved);
 
   pills.forEach(pill => {
-    pill.addEventListener('click', () => setTheme(pill.dataset.theme));
+    pill.addEventListener('click', () => setTheme(pill.dataset.theme ?? 'dark-navy'));
   });
 </script>

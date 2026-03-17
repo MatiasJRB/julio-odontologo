@@ -156,6 +156,17 @@
   background: var(--color-gold);
   color: var(--color-navy);
 }
+/* T4 — link a layout alternativo */
+.theme-pill--t4 {
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  position: relative;
+}
+.theme-pill--t4:hover {
+  background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.95);
+  border-color: rgba(255,255,255,0.4);
+}
 
 /* Transición suave de paleta al cambiar tema */
 body, .navbar, .hero, .empresa, .quienes, .hacemos, .contacto, .footer {
@@ -661,6 +672,15 @@ body, .navbar, .hero, .empresa, .quienes, .hacemos, .contacto, .footer {
   display: none;
   background: #f0f9f4; border: 1px solid #a8d5b8;
   color: #2d6a4f; border-radius: var(--radius);
+  padding: 1rem 1.25rem; font-size: 0.875rem;
+  text-align: center; align-items: center;
+  gap: 0.5rem; justify-content: center;
+}
+
+.form__error {
+  display: none;
+  background: #fef2f2; border: 1px solid #f5c6c6;
+  color: #991b1b; border-radius: var(--radius);
   padding: 1rem 1.25rem; font-size: 0.875rem;
   text-align: center; align-items: center;
   gap: 0.5rem; justify-content: center;
