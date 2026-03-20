@@ -46,7 +46,7 @@ import '../styles/components.css';
           Julio Alejandro<strong>Ferraro</strong>
         </h1>
         <p class="hero__subtitle">Óptico Contactólogo · Protesista Ocular · UBA</p>
-        <p class="hero__mp">M.P. COCBA 163</p>
+        <p class="hero__mp">M.P. COPBA 163</p>
         <p class="hero__description">
           Dedicación exclusiva a la adaptación profesional de <strong>LENTES DE CONTACTO</strong>
           y <strong>PRÓTESIS OCULARES</strong>. Más de cuarenta años acompañando a nuestros pacientes
@@ -140,7 +140,7 @@ import '../styles/components.css';
           </h2>
           <div class="section-divider" data-animate data-animate-delay="2"></div>
           <p class="section-body" data-animate data-animate-delay="2">
-            Nos dedicamos <strong>EXCLUSIVAMENTE</strong> a la adaptación de <strong>LENTES DE
+            Nos dedicamos exclusivamente a la adaptación de <strong>LENTES DE
             CONTACTO</strong> y <strong>PRÓTESIS OCULARES</strong>. En la zona nos conocen por esa dedicación
             exclusiva y por el trato amable y respetuoso que hace que los pacientes
             nos elijan.
@@ -361,8 +361,8 @@ import '../styles/components.css';
           </h2>
           <div class="section-divider" data-animate data-animate-delay="2"></div>
           <p class="section-body" data-animate data-animate-delay="2">
-            Consúltenos sin compromiso. Le responderemos a la brevedad o puede
-            comunicarse directamente a nuestro local.
+            Consúltenos sin compromiso. Complete el formulario y su consulta
+            se enviará directamente a nuestro WhatsApp.
           </p>
 
           <div class="contacto__info" data-animate data-animate-delay="3">
@@ -392,7 +392,7 @@ import '../styles/components.css';
               </div>
               <div>
                 <p class="contacto__item-title">Matrícula</p>
-                <p class="contacto__item-text">M.P. COCBA 163</p>
+                <p class="contacto__item-text">M.P. COPBA 163</p>
               </div>
             </div>
             <div class="contacto__item">
@@ -431,11 +431,6 @@ import '../styles/components.css';
             <div class="form__group">
               <label class="form__label" for="nombre">Nombre</label>
               <input class="form__input" type="text" id="nombre" name="nombre" placeholder="Su nombre" required />
-            </div>
-
-            <div class="form__group">
-              <label class="form__label" for="email">Email</label>
-              <input class="form__input" type="email" id="email" name="email" placeholder="su@email.com" />
             </div>
 
             <div class="form__group">
@@ -521,7 +516,7 @@ import '../styles/components.css';
       <div class="footer__inner">
         <div>
           <p class="footer__brand-name">Julio A. Ferraro Contactología</p>
-          <p class="footer__brand-sub">Óptico Contactólogo · Protesista Ocular · UBA · M.P. COCBA 163</p>
+          <p class="footer__brand-sub">Óptico Contactólogo · Protesista Ocular · UBA · M.P. COPBA 163</p>
         </div>
         <ul class="footer__links">
           <li><a href="#empresa">Empresa</a></li>
@@ -597,7 +592,6 @@ import '../styles/components.css';
     e.preventDefault();
 
     const nombre     = (document.getElementById('nombre')   as HTMLInputElement)?.value.trim();
-    const email      = (document.getElementById('email')    as HTMLInputElement)?.value.trim();
     const motivo     = motivoSelect?.value;
     const consultaEl = document.getElementById('consulta') as HTMLTextAreaElement;
     const consulta   = consultaEl?.value.trim();
@@ -617,9 +611,7 @@ import '../styles/components.css';
     consultaEl?.setCustomValidity('');
 
     let msg = 'Hola, les escribo desde su sitio web.';
-    msg += `\n\nMi nombre es *${nombre}*`;
-    if (email) msg += ` y mi correo es ${email}.`;
-    else msg += '.';
+    msg += `\n\nMi nombre es *${nombre}*.`;
 
     if (motivo === 'turno') {
       const dia  = (document.getElementById('dia')  as HTMLInputElement)?.value;
