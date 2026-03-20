@@ -586,36 +586,167 @@
 }
 
 /* ── Formulario ── */
-.form { display: flex; flex-direction: column; gap: var(--form-gap); }
+.form {
+  display: flex; flex-direction: column; gap: var(--form-gap);
+  background: var(--color-navy-light, #172136);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: calc(var(--radius) + 4px);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Steps */
+.form__step {
+  display: none;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: formStepIn 0.3s ease both;
+}
+.form__step--active { display: flex; }
+
+@keyframes formStepIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.form__step-title {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+/* Motivo cards */
+.form__motivo-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form__motivo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.75rem 1rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: calc(var(--radius) + 2px);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  color: rgba(255,255,255,0.7);
+}
+.form__motivo-card:hover {
+  border-color: var(--color-gold);
+  background: rgba(255,255,255,0.07);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.form__motivo-card:active { transform: scale(0.97); }
+
+.form__motivo-card.selected {
+  border-color: var(--color-gold);
+  background: rgba(184, 150, 110, 0.12);
+  color: #fff;
+}
+
+.form__motivo-icon {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-gold);
+  transition: background 0.2s;
+}
+.form__motivo-card:hover .form__motivo-icon,
+.form__motivo-card.selected .form__motivo-icon {
+  background: rgba(184, 150, 110, 0.15);
+}
+
+.form__motivo-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* Back button */
+.form__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 0.25rem;
+  transition: color 0.2s;
+  align-self: flex-start;
+}
+.form__back:hover { color: var(--color-gold-light); }
+
+/* Field hint */
+.form__field-hint {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 0.25rem;
+}
 
 .form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
 .form__group { display: flex; flex-direction: column; gap: 0.4rem; }
 
 .form__label {
-  font-size: 0.75rem; font-weight: 500;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--color-text-light);
+  font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
 }
 
 .form__input,
 .form__textarea {
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--color-border);
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(255,255,255,0.12);
   border-radius: var(--radius);
   font-family: var(--font-sans); font-size: 0.9rem;
-  color: var(--color-text); background: var(--color-ivory);
-  transition: border-color var(--transition), box-shadow var(--transition);
+  color: #fff;
+  background: rgba(255,255,255,0.05);
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
   outline: none; width: 100%;
+}
+.form__input::placeholder,
+.form__textarea::placeholder {
+  color: rgba(255,255,255,0.3);
 }
 .form__input:focus,
 .form__textarea:focus {
   border-color: var(--color-gold);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-gold) 15%, transparent);
+  background: rgba(255,255,255,0.07);
+  box-shadow: 0 0 0 3px rgba(184, 150, 110, 0.15);
 }
 
-.form__textarea { min-height: 130px; resize: vertical; }
-.form__submit   { width: 100%; padding: 0.9rem; font-size: 0.85rem; }
+/* Select arrow styling */
+.form__input[type="date"],
+select.form__input {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2.25rem;
+}
+/* Date input color-scheme */
+.form__input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.7);
+  cursor: pointer;
+}
+
+.form__textarea { min-height: 110px; resize: vertical; }
+.form__submit   { width: 100%; padding: 1rem; font-size: 0.9rem; margin-top: 0.25rem; }
 
 .form__success {
   display: none;
@@ -677,38 +808,9 @@
   color: var(--wa-color);
 }
 
-/* Separador "o bien" + botón WhatsApp dentro del formulario */
-.form__whatsapp-option {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.form__whatsapp-or {
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-text-muted, rgba(255,255,255,0.4));
-  position: relative;
-  width: 100%;
-  text-align: center;
-}
-.form__whatsapp-or::before,
-.form__whatsapp-or::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 38%;
-  height: 1px;
-  background: var(--color-divider, rgba(255,255,255,0.1));
-}
-.form__whatsapp-or::before { left: 0; }
-.form__whatsapp-or::after  { right: 0; }
-
 .form__whatsapp-hint {
   font-size: 0.72rem;
-  color: var(--color-text-muted, rgba(255,255,255,0.35));
+  color: rgba(255,255,255,0.35);
   text-align: center;
 }
 
@@ -766,6 +868,8 @@
 @media (max-width: 768px) {
   .contacto__grid { grid-template-columns: 1fr; gap: 3rem; }
   .form__row      { grid-template-columns: 1fr; }
+  .form__motivo-cards { grid-template-columns: 1fr; }
+  .form { padding: 1.5rem; }
   #ferraro-map    { height: 260px; }
   .whatsapp-float {
     bottom: 1.25rem;
