@@ -588,8 +588,8 @@
 /* ── Formulario ── */
 .form {
   display: flex; flex-direction: column; gap: var(--form-gap);
-  background: var(--color-navy-light, #172136);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: var(--color-ivory, #f8f5f0);
+  border: 1px solid var(--color-border);
   border-radius: calc(var(--radius) + 4px);
   padding: 2rem;
   position: relative;
@@ -609,29 +609,29 @@
   justify-content: center;
   gap: 0.5rem;
   padding: 0.65rem 1rem;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: var(--color-white, #fff);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius);
-  color: rgba(255,255,255,0.6);
+  color: var(--color-text-light);
   font-size: 0.82rem;
   font-weight: 500;
   cursor: pointer;
   transition: border-color 0.2s, background 0.2s, color 0.2s;
 }
 .form__motivo-btn:hover {
-  border-color: rgba(255,255,255,0.25);
-  color: rgba(255,255,255,0.85);
+  border-color: var(--color-gold);
+  color: var(--color-text);
 }
 .form__motivo-btn.selected {
   border-color: var(--color-gold);
-  background: rgba(184, 150, 110, 0.12);
-  color: var(--color-gold-light, #d4b896);
+  background: rgba(184, 150, 110, 0.1);
+  color: var(--color-navy, #0d1424);
 }
 
 /* Field hint */
 .form__field-hint {
   font-size: 0.75rem;
-  color: rgba(255,255,255,0.4);
+  color: var(--color-text-light);
   margin-bottom: 0.25rem;
 }
 
@@ -642,28 +642,28 @@
 .form__label {
   font-size: 0.72rem; font-weight: 600;
   letter-spacing: 0.1em; text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
+  color: var(--color-text-light);
 }
 
 .form__input,
 .form__textarea {
   padding: 0.8rem 1rem;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius);
   font-family: var(--font-sans); font-size: 0.9rem;
-  color: #fff;
-  background: rgba(255,255,255,0.05);
+  color: var(--color-text);
+  background: var(--color-white, #fff);
   transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
   outline: none; width: 100%;
 }
 .form__input::placeholder,
 .form__textarea::placeholder {
-  color: rgba(255,255,255,0.3);
+  color: var(--color-text-light);
 }
 .form__input:focus,
 .form__textarea:focus {
   border-color: var(--color-gold);
-  background: rgba(255,255,255,0.07);
+  background: #fff;
   box-shadow: 0 0 0 3px rgba(184, 150, 110, 0.15);
 }
 
@@ -672,14 +672,13 @@
 select.form__input {
   appearance: none;
   -webkit-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   padding-right: 2.25rem;
 }
 /* Date input color-scheme */
 .form__input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(0.7);
   cursor: pointer;
 }
 
@@ -748,7 +747,7 @@ select.form__input {
 
 .form__whatsapp-hint {
   font-size: 0.72rem;
-  color: rgba(255,255,255,0.35);
+  color: var(--color-text-light);
   text-align: center;
 }
 
