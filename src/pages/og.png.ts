@@ -1,26 +1,16 @@
 import type { APIRoute } from 'astro';
 import satori from 'satori';
-import { Resvg, initWasm } from '@resvg/resvg-wasm';
-import resvgWasm from '@resvg/resvg-wasm/index_bg.wasm?url';
-
-let wasmInitialized = false;
+import { Resvg } from '@resvg/resvg-js';
 
 export const GET: APIRoute = async () => {
-  // Initialize WASM once
-  if (!wasmInitialized) {
-    const wasmResponse = await fetch(new URL(resvgWasm, 'file://'));
-    await initWasm(wasmResponse);
-    wasmInitialized = true;
-  }
-
   // Fetch Inter font for body text
   const interFont = await fetch(
-    'https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hjQ.woff'
+    'https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfMZg.ttf'
   ).then((res) => res.arrayBuffer());
 
   // Fetch Cormorant Garamond for display text
   const cormorantFont = await fetch(
-    'https://fonts.gstatic.com/s/cormorantgaramond/v16/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff'
+    'https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_hg9GnM.ttf'
   ).then((res) => res.arrayBuffer());
 
   const svg = await satori(
