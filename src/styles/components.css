@@ -760,6 +760,111 @@
   border-radius: 999px;
 }
 
+/* Calendar dropdown (compacto) */
+.cal-drop {
+  display: none;
+  position: absolute;
+  z-index: 50;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 260px;
+  background: var(--color-white, #fff);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  padding: 0.75rem;
+  user-select: none;
+}
+.custom-select--active .cal-drop {
+  display: block;
+  animation: selectDrop 0.15s ease;
+}
+
+.cal-drop__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.cal-drop__month {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.cal-drop__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-light);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.cal-drop__arrow:hover {
+  background: var(--color-ivory);
+  color: var(--color-gold);
+}
+.cal-drop__arrow:disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.cal-drop__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 0.58rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-light);
+  margin-bottom: 0.25rem;
+}
+
+.cal-drop__days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+}
+
+.cal-drop__day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; aspect-ratio: 1;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 0.72rem;
+  font-weight: 500;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+.cal-drop__day:hover {
+  background: var(--color-ivory);
+}
+.cal-drop__day--today {
+  font-weight: 700;
+  color: var(--color-gold);
+}
+.cal-drop__day--selected {
+  background: var(--color-gold) !important;
+  color: #fff !important;
+}
+.cal-drop__day--disabled {
+  color: var(--color-border);
+  pointer-events: none;
+}
+.cal-drop__day--empty {
+  pointer-events: none;
+}
+
 .form__textarea { min-height: 110px; resize: vertical; }
 .form__submit   { width: 100%; padding: 1rem; font-size: 0.9rem; margin-top: 0.25rem; }
 

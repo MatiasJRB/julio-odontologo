@@ -458,7 +458,21 @@ import '../styles/components.css';
                       <span class="custom-select__value" id="valueDia">Seleccione un día</span>
                       <Icon name="calendar" size={15} />
                     </button>
-                    <ul class="custom-select__dropdown" id="dropdownDia"></ul>
+                    <div class="cal-drop" id="calDrop">
+                      <div class="cal-drop__nav">
+                        <button type="button" class="cal-drop__arrow" id="calPrev" aria-label="Mes anterior">
+                          <Icon name="arrow-left" size={14} />
+                        </button>
+                        <span class="cal-drop__month" id="calMonth"></span>
+                        <button type="button" class="cal-drop__arrow" id="calNext" aria-label="Mes siguiente">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </button>
+                      </div>
+                      <div class="cal-drop__weekdays">
+                        <span>Lu</span><span>Ma</span><span>Mi</span><span>Ju</span><span>Vi</span><span>Sá</span><span>Do</span>
+                      </div>
+                      <div class="cal-drop__days" id="calDays"></div>
+                    </div>
                     <input type="hidden" id="dia" name="dia" />
                   </div>
                 </div>
@@ -591,7 +605,7 @@ import '../styles/components.css';
 
   let selectedMotivo = 'consulta';
 
-  // ── Custom select genérico ──
+  // ── Custom select genérico (para hora) ──
   function initCustomSelect(
     wrapperId: string,
     triggerId: string,
@@ -608,7 +622,6 @@ import '../styles/components.css';
 
     trigger.addEventListener('click', (e) => {
       e.stopPropagation();
-      // Cerrar otros selects abiertos
       document.querySelectorAll('.custom-select--active').forEach(el => {
         if (el !== wrapper) el.classList.remove('custom-select--active');
       });
@@ -622,7 +635,6 @@ import '../styles/components.css';
         valueEl.textContent = opt.textContent;
         wrapper.classList.add('custom-select--has-value');
         wrapper.classList.remove('custom-select--active');
-        // Marcar seleccionado
         dropdown.querySelectorAll('.custom-select__option').forEach(o => o.classList.remove('custom-select__option--selected'));
         opt.classList.add('custom-select__option--selected');
       });
@@ -634,30 +646,107 @@ import '../styles/components.css';
     document.querySelectorAll('.custom-select--active').forEach(el => el.classList.remove('custom-select--active'));
   });
 
-  // ── Generar opciones de día (próximos 90 días, sin domingos) ──
-  const DIAS_SEMANA = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
-  const MESES = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-  const dropdownDia = document.getElementById('dropdownDia');
-  if (dropdownDia) {
-    const today = new Date();
-    today.setHours(0,0,0,0);
-    for (let i = 1; i <= 90; i++) {
-      const d = new Date(today);
-      d.setDate(d.getDate() + i);
-      if (d.getDay() === 0) continue; // saltar domingos
-      const iso = d.toISOString().split('T')[0];
-      const label = `${DIAS_SEMANA[d.getDay()]} ${d.getDate()} ${MESES[d.getMonth()]}`;
-      const li = document.createElement('li');
-      li.className = 'custom-select__option';
-      li.dataset.value = iso;
-      li.textContent = label;
-      dropdownDia.appendChild(li);
+  // Inicializar select de hora
+  initCustomSelect('selectHora', 'triggerHora', 'valueHora', 'dropdownHora', 'hora');
+
+  // ── Calendario dropdown compacto ──
+  const MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const DIAS_CORTO = ['Lu','Ma','Mi','Ju','Vi','Sá','Do'];
+  const selectDia = document.getElementById('selectDia');
+  const triggerDia = document.getElementById('triggerDia');
+  const valueDia = document.getElementById('valueDia');
+  const calDrop = document.getElementById('calDrop');
+  const calDays = document.getElementById('calDays');
+  const calMonthEl = document.getElementById('calMonth');
+  const calPrev = document.getElementById('calPrev');
+  const calNext = document.getElementById('calNext');
+
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const maxDate = new Date(today);
+  maxDate.setMonth(maxDate.getMonth() + 3);
+
+  let calYear = today.getFullYear();
+  let calMon = today.getMonth();
+  let selectedDay = '';
+
+  function renderCal() {
+    if (!calDays || !calMonthEl) return;
+    calMonthEl.textContent = `${MESES[calMon]} ${calYear}`;
+
+    const first = new Date(calYear, calMon, 1);
+    let startDay = first.getDay() - 1;
+    if (startDay < 0) startDay = 6;
+    const daysInMonth = new Date(calYear, calMon + 1, 0).getDate();
+
+    let html = '';
+    for (let i = 0; i < startDay; i++) {
+      html += '<span class="cal-drop__day cal-drop__day--empty"></span>';
     }
+    for (let d = 1; d <= daysInMonth; d++) {
+      const date = new Date(calYear, calMon, d);
+      const iso = `${calYear}-${String(calMon+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const isPast = date < today;
+      const isFuture = date > maxDate;
+      const isToday = date.getTime() === today.getTime();
+      const isSelected = iso === selectedDay;
+      const isSun = date.getDay() === 0;
+
+      let cls = 'cal-drop__day';
+      if (isPast || isFuture || isSun) cls += ' cal-drop__day--disabled';
+      if (isToday) cls += ' cal-drop__day--today';
+      if (isSelected) cls += ' cal-drop__day--selected';
+
+      html += `<button type="button" class="${cls}" data-date="${iso}">${d}</button>`;
+    }
+    calDays.innerHTML = html;
+
+    calDays.querySelectorAll<HTMLButtonElement>('.cal-drop__day:not(.cal-drop__day--disabled):not(.cal-drop__day--empty)').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        selectedDay = btn.dataset.date ?? '';
+        if (diaHidden) diaHidden.value = selectedDay;
+        // Mostrar fecha legible en trigger
+        const parts = selectedDay.split('-');
+        const selDate = new Date(+parts[0], +parts[1]-1, +parts[2]);
+        const diasNombre = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+        const mesesCorto = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+        if (valueDia) valueDia.textContent = `${diasNombre[selDate.getDay()]} ${selDate.getDate()} de ${mesesCorto[selDate.getMonth()]}`;
+        selectDia?.classList.add('custom-select--has-value');
+        selectDia?.classList.remove('custom-select--active');
+        renderCal();
+      });
+    });
+
+    // Deshabilitar flechas en límites
+    if (calPrev) (calPrev as HTMLButtonElement).disabled = (calYear === today.getFullYear() && calMon === today.getMonth());
+    if (calNext) (calNext as HTMLButtonElement).disabled = (calYear === maxDate.getFullYear() && calMon === maxDate.getMonth());
   }
 
-  // Inicializar ambos selects
-  initCustomSelect('selectDia', 'triggerDia', 'valueDia', 'dropdownDia', 'dia');
-  initCustomSelect('selectHora', 'triggerHora', 'valueHora', 'dropdownHora', 'hora');
+  triggerDia?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    document.querySelectorAll('.custom-select--active').forEach(el => {
+      if (el !== selectDia) el.classList.remove('custom-select--active');
+    });
+    selectDia?.classList.toggle('custom-select--active');
+  });
+
+  calDrop?.addEventListener('click', (e) => e.stopPropagation());
+
+  calPrev?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    calMon--;
+    if (calMon < 0) { calMon = 11; calYear--; }
+    renderCal();
+  });
+  calNext?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    calMon++;
+    if (calMon > 11) { calMon = 0; calYear++; }
+    renderCal();
+  });
+
+  renderCal();
 
   // Toggle motivo
   motivoBtns.forEach(btn => {
