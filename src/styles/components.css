@@ -667,19 +667,123 @@
   box-shadow: 0 0 0 3px rgba(184, 150, 110, 0.15);
 }
 
-/* Select arrow styling */
-.form__input[type="date"],
-select.form__input {
-  appearance: none;
-  -webkit-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.75rem center;
-  padding-right: 2.25rem;
+/* Custom date picker - Mini calendar */
+.picker-cal {
+  background: var(--color-white, #fff);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.75rem;
+  user-select: none;
 }
-/* Date input color-scheme */
-.form__input[type="date"]::-webkit-calendar-picker-indicator {
+
+.picker-cal__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+}
+
+.picker-cal__month {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text);
+  text-transform: capitalize;
+}
+
+.picker-cal__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px; height: 30px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-light);
+  border-radius: 50%;
   cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.picker-cal__arrow:hover {
+  background: var(--color-ivory);
+  color: var(--color-gold);
+}
+
+.picker-cal__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-light);
+  margin-bottom: 0.35rem;
+}
+
+.picker-cal__days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.picker-cal__day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; aspect-ratio: 1;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 0.78rem;
+  font-weight: 500;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.picker-cal__day:hover {
+  background: var(--color-ivory);
+}
+.picker-cal__day--today {
+  font-weight: 700;
+  color: var(--color-gold);
+}
+.picker-cal__day--selected {
+  background: var(--color-gold) !important;
+  color: #fff !important;
+}
+.picker-cal__day--disabled {
+  color: var(--color-border);
+  pointer-events: none;
+}
+.picker-cal__day--empty {
+  pointer-events: none;
+}
+
+/* Custom time picker - Chips */
+.picker-time {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.picker-time__chip {
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-white, #fff);
+  color: var(--color-text);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+.picker-time__chip:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+.picker-time__chip.selected {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: #fff;
 }
 
 .form__textarea { min-height: 110px; resize: vertical; }
