@@ -1,46 +1,29 @@
 ---
 /**
- * Layout principal
- *
- * Prop `theme` acepta el nombre de un archivo en src/themes/
- * Opciones disponibles: 'dark-navy' (default) | 'light-clean' | 'warm-cream'
- *
- * Para agregar un nuevo tema:
- *   1. Crear src/themes/mi-tema.css con las variables :root
- *   2. Pasar theme="mi-tema" a <Layout>
+ * Layout principal — Tema fijo: dark-navy
  */
 interface Props {
   title?: string;
   description?: string;
-  theme?: 'dark-navy' | 'light-clean' | 'warm-cream';
 }
 
 const {
   title       = 'Julio A. Ferraro Contactología — Bahía Blanca',
-  description = 'Adaptación profesional de lentes de contacto y prótesis oculares en Bahía Blanca. Desde 1981. M.P. 163.',
-  theme       = 'dark-navy',
+  description = 'Adaptación profesional de lentes de contacto y prótesis oculares en Bahía Blanca. Desde 1981. M.P. COCBA 163.',
 } = Astro.props;
 
 const siteUrl   = 'https://julioferraro.com.ar';
 const ogImage   = `${siteUrl}/hero.webp`;
 const canonical = siteUrl;
 
-// Importamos dinámicamente el tema seleccionado
-const themes: Record<string, string> = {
-  'dark-navy':   '/src/themes/dark-navy.css',
-  'light-clean': '/src/themes/light-clean.css',
-  'warm-cream':  '/src/themes/warm-cream.css',
-};
-
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   '@id': siteUrl,
   name: 'Julio A. Ferraro Contactología',
-  description: 'Adaptación profesional de lentes de contacto y prótesis oculares. Óptico Contactólogo — Protesista Ocular. M.P. 163.',
+  description: 'Adaptación profesional de lentes de contacto y prótesis oculares. Óptico Contactólogo — Protesista Ocular — UBA. M.P. COCBA 163.',
   url: siteUrl,
-  telephone: '+542914540455',
-  email: 'ferraroptico@yahoo.com.ar',
+  telephone: '+5492916442425',
   foundingDate: '1981',
   address: {
     '@type': 'PostalAddress',
@@ -70,13 +53,6 @@ const jsonLd = {
 <html lang="es" data-theme="dark-navy">
   <head>
     <meta charset="UTF-8" />
-    <!-- Script inline: aplica tema guardado ANTES del primer paint (sin flash) -->
-    <script is:inline>
-      (function() {
-        var t = localStorage.getItem('ferraro-theme');
-        if (t) document.documentElement.setAttribute('data-theme', t);
-      })();
-    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />

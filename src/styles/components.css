@@ -125,57 +125,6 @@
   transition: transform var(--transition), opacity var(--transition);
 }
 
-/* ── Theme picker (3 pills) ── */
-.theme-picker {
-  display: flex;
-  gap: 3px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 20px;
-  padding: 3px;
-  flex-shrink: 0;
-  animation: nav-item-in 0.4s ease 0.7s both;
-}
-.theme-pill {
-  font-family: var(--font-sans);
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  padding: 4px 9px;
-  border-radius: 16px;
-  border: none;
-  cursor: pointer;
-  background: transparent;
-  color: rgba(255,255,255,0.5);
-  transition: background 0.2s, color 0.2s;
-  white-space: nowrap;
-  line-height: 1;
-}
-.theme-pill:hover { color: rgba(255,255,255,0.9); }
-.theme-pill.active {
-  background: var(--color-gold);
-  color: var(--color-navy);
-}
-/* T4 — link a layout alternativo */
-.theme-pill--t4 {
-  text-decoration: none;
-  border: 1px solid rgba(255,255,255,0.2);
-  position: relative;
-}
-.theme-pill--t4:hover {
-  background: rgba(255,255,255,0.12);
-  color: rgba(255,255,255,0.95);
-  border-color: rgba(255,255,255,0.4);
-}
-
-/* Transición suave de paleta al cambiar tema */
-body, .navbar, .hero, .empresa, .quienes, .hacemos, .contacto, .footer {
-  transition:
-    background-color 0.35s ease,
-    color 0.35s ease,
-    border-color 0.35s ease;
-}
-
 @media (max-width: 768px) {
   .navbar__links {
     display: none;
@@ -189,7 +138,6 @@ body, .navbar, .hero, .empresa, .quienes, .hacemos, .contacto, .footer {
   .navbar__links.open { display: flex; }
   .navbar__links a { font-size: 1.1rem; }
   .navbar__burger { display: flex; position: relative; z-index: 101; }
-  .theme-picker   { position: relative; z-index: 101; }
 }
 
 /* ============================================================
@@ -591,6 +539,7 @@ body, .navbar, .hero, .empresa, .quienes, .hacemos, .contacto, .footer {
   .hacemos__services-grid--3    { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 600px) {
+  .hacemos__header { margin-bottom: 2.75rem; }
   .hacemos__services-grid,
   .hacemos__services-grid--3    { grid-template-columns: 1fr 1fr; }
   .hacemos__insumos { flex-direction: column; text-align: center; }
