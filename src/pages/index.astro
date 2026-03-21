@@ -577,12 +577,14 @@ import '../styles/components.css';
   burger?.addEventListener('click', () => {
     navLinks?.classList.toggle('open');
     burger.classList.toggle('active');
+    navbar?.classList.toggle('menu-open');
     document.body.style.overflow = navLinks?.classList.contains('open') ? 'hidden' : '';
   });
   navLinks?.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       navLinks.classList.remove('open');
       burger?.classList.remove('active');
+      navbar?.classList.remove('menu-open');
       document.body.style.overflow = '';
     });
   });

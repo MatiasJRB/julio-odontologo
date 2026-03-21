@@ -13,8 +13,6 @@
   z-index: 100;
   padding: 1.25rem 0;
   background: transparent;
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
   border-bottom: 1px solid transparent;
   box-shadow: none;
   transition:
@@ -126,6 +124,12 @@
 }
 
 @media (max-width: 768px) {
+  /* Disable backdrop-filter on navbar when menu is open
+     (backdrop-filter creates a containing block for position:fixed children) */
+  .navbar.menu-open {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
   .navbar__links {
     display: none;
     position: fixed; inset: 0;
